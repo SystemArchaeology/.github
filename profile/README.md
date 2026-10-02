@@ -363,10 +363,6 @@ Only then remove the original
 
 A lightweight local web server designed primarily for previewing and diagnosing documentation websites.
 
-### `clipkit`
-
-A toolkit-oriented approach to downloading and processing online video content.
-
 ---
 
 # 🔬 Hardware & Electronics
