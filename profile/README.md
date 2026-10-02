@@ -10,46 +10,529 @@
 
 ---
 
-Every tool gives you a clean surface — a command, a button, a page of docs. But under that
-surface, something is *actually* happening: processes, packets, syscalls, files, bytes.
-**That's the dig site.**
+**System Archaeology** is a collection of experiments, tools, documentation, and research projects focused on understanding how computing systems actually work.
 
-We investigate systems the way archaeologists uncover the layers of a civilization — going
-past the API, the command, the GUI, and the documentation to show what is really happening
-underneath, layer by layer.
+We don't stop at the command, API, GUI, or abstraction.
 
-**Linux / Unix · Windows internals · programming · the cloud · AI** — in screen-first deep dives.
+We dig underneath it.
 
-### Where to find us
+From **C, Linux, and Windows internals** to **networking, virtualization, storage, Kubernetes, hardware, documentation systems, and AI tooling**, the goal is to build things, take them apart, trace their behavior, and document what we discover.
 
-- ▶️ **YouTube** — [@SystemArchaeology](https://youtube.com/@SystemArchaeology) · deep dives & screencasts (EN + AR)
-- ✍️ **Writing & tools** — [abdelhaleemahmed.github.io](https://abdelhaleemahmed.github.io)
+---
 
-### Tools we build and use
+## What We Do
 
-- **[servewise](https://github.com/abdelhaleemahmed/servewise)** — a tiny, dependency-free local
-  preview server that tells you the truth: caching off by default, safe port selection, and it
-  audits its own version so you never silently serve the wrong build.
-- **slimv** — a Python A/V re-encoding toolkit for shrinking and verifying recordings without
-  trusting the file size alone.
+We explore technology from the layers above the abstraction down to the machinery underneath:
+
+```text
+Applications
+     ↓
+Libraries & APIs
+     ↓
+System Calls
+     ↓
+Operating System
+     ↓
+Kernel
+     ↓
+Drivers
+     ↓
+Hardware
+     ↓
+Machine
+```
+
+The projects in this organization are therefore not simply "tools".
+
+Many are **laboratories**.
+
+They exist to answer questions such as:
+
+* What actually happens when a Linux command runs?
+* What actually happens when a Windows command or `.exe` runs?
+* How does a C program become a process?
+* What happens between a system call and the kernel?
+* How does a Win32 call reach the NT kernel?
+* What does the Windows registry really store, and where does it live on disk?
+* What is really inside a Kubernetes cluster?
+* How do containers reach the kernel?
+* How does a tape library actually work?
+* What happens during Linux boot — and how does Windows boot differ?
+* How do filesystems, storage devices, and backup systems interact?
+* How can complex technical documentation be made searchable, verifiable, and reproducible?
+* How can AI assist engineers without inventing technical facts?
+
+---
+
+# Projects
+
+## 🐧 Linux & Systems
+
+Projects exploring Linux, Unix, C programming, system programming, kernel internals, boot processes, tracing, and low-level behavior.
+
+### Kernel & Systems Research
+
+Experiments and educational material for understanding the Linux kernel from the inside out.
+
+Topics include:
+
+* kernel architecture
+* processes and scheduling
+* memory management
+* system calls
+* filesystems
+* networking
+* device drivers
+* kernel modules
+* eBPF
+* tracing and observability
+* boot and initialization
+
+---
+
+## 💻 Systems Programming
+
+A long-term exploration of **C, Unix APIs, POSIX, assembly, executable formats, and operating-system interfaces**.
+
+The philosophy is simple:
+
+> Learn the abstraction, then learn what is underneath it.
+
+The learning path starts with C and progressively moves toward:
+
+```text
+C
+ ↓
+POSIX / Unix
+ ↓
+Processes
+ ↓
+System Calls
+ ↓
+ELF & Linking
+ ↓
+Assembly
+ ↓
+Kernel Interfaces
+ ↓
+Kernel Internals
+ ↓
+Hardware
+```
+
+---
+
+# 🪟 Windows Internals
+
+Windows gets the same treatment as Linux: not a black box you click through, but a documented, debuggable system with its own well-defined layers — from the Win32 call at the top down to the hardware.
+
+The path from a user-mode call to the machine:
+
+```text
+Win32 / .NET Applications
+        ↓
+Win32 API  (kernel32, user32, gdi32)
+        ↓
+Native API  (ntdll.dll)
+        ↓
+System Service Dispatch  (syscall)
+        ↓
+Executive & Kernel  (ntoskrnl.exe)
+        ↓
+HAL
+        ↓
+Hardware
+```
+
+Projects and experiments investigate:
+
+* the NT kernel, the executive, and the HAL
+* processes, threads, jobs, and the scheduler
+* the virtual memory manager and working sets
+* the **registry** — what it stores and where (hives on disk)
+* **services** and the Service Control Manager
+* the Win32 subsystem vs the **native API** (`ntdll`)
+* **PE / COFF** executable format, image loading, and DLLs
+* drivers (WDM, KMDF / UMDF) and the I/O manager
+* **ETW**, performance counters, and tracing
+* kernel debugging and crash-dump analysis with **WinDbg**
+* the Windows boot process (UEFI → `bootmgr` → `winload` → `ntoskrnl`)
+* **WMI, COM**, and PowerShell internals
+* **WSL, Hyper-V**, and containers on Windows
+
+The questions mirror the Linux ones:
+
+* How does a Win32 call become a syscall into the NT kernel?
+* What is really inside a crash dump?
+* How do Hyper-V and WSL reach the hardware?
+* Where does Windows actually keep its configuration — and why?
+
+---
+
+# 🌐 Networking
+
+Experiments and educational projects covering networking from the packet level upward.
+
+Areas include:
+
+* Ethernet
+* TCP/IP
+* DNS
+* HTTP
+* routing
+* sockets
+* packet analysis
+* network programming
+* Linux networking
+* Windows networking
+* network troubleshooting
+* network security
+
+The emphasis is on understanding **what actually happens on the wire**.
+
+---
+
+# ☸️ Kubernetes & Containers
+
+Kubernetes is approached from the bottom up rather than treating it as a black box.
+
+The goal is to understand the components underneath Kubernetes:
+
+```text
+Kubernetes
+    ↓
+kubelet
+    ↓
+containerd
+    ↓
+runc
+    ↓
+Linux namespaces
+    ↓
+cgroups
+    ↓
+Linux kernel
+```
+
+Projects and experiments investigate:
+
+* Kubernetes components
+* containers
+* namespaces
+* cgroups
+* container runtimes
+* networking
+* storage
+* cluster architecture
+* the binaries that make Kubernetes work
+
+---
+
+# 💾 Storage, Tape & Backup
+
+Projects exploring storage technology and enterprise backup systems.
+
+One major area is the construction of a complete Linux-based tape laboratory involving:
+
+* MHVTL
+* virtual tape libraries
+* SCSI generic devices
+* LTO drives
+* tape changers
+* Bareos
+* PostgreSQL
+* backup catalogs
+* disaster recovery
+* bare-metal recovery
+
+The objective is not simply to configure backup software, but to understand the entire chain:
+
+```text
+Backup Application
+       ↓
+Backup Catalog
+       ↓
+Tape Management
+       ↓
+SCSI
+       ↓
+Tape Drive
+       ↓
+Tape
+```
+
+---
+
+# 🖥️ Virtualization
+
+### `vmctl`
+
+A Terraform-inspired command-line tool for managing local virtual machines.
+
+The project is designed around:
+
+* declarative VM definitions
+* YAML / JSON configuration
+* validation
+* dry-run operation
+* cloning
+* replication
+* Git-managed infrastructure
+* hypervisor capability checking
+
+The initial target is VirtualBox, with a longer-term goal of supporting KVM/QEMU and Hyper-V.
+
+---
+
+# 📚 Documentation Engineering
+
+Technical documentation is treated as an engineering system rather than simply a collection of Markdown files.
+
+Projects explore:
+
+* Sphinx
+* MkDocs
+* Docusaurus
+* Diátaxis
+* Mermaid
+* requirements traceability
+* documentation validation
+* searchable documentation
+* technical claim verification
+* reproducible documentation builds
+
+We are particularly interested in the question:
+
+> **How do you know that technical documentation is actually correct?**
+
+---
+
+# 🤖 Local AI & Technical Knowledge Systems
+
+Experiments with local AI systems for engineering and technical documentation.
+
+Areas include:
+
+* local LLMs
+* RAG
+* embeddings
+* technical document retrieval
+* offline knowledge bases
+* code assistance
+* documentation assistants
+* local text-to-speech
+* Arabic technical language support
+
+The goal is to build AI systems that are useful **without sacrificing technical accuracy or traceability**.
+
+A core principle:
+
+> **If the system doesn't know, it should say that it doesn't know.**
+
+---
+
+# 🔧 Developer Tools
+
+Small utilities designed to solve practical engineering problems.
+
+Some projects are deliberately small.
+
+Others are experiments that may eventually grow into full tools.
+
+Examples include:
+
+### `slimv`
+
+A video-library optimization tool designed to reduce storage consumption while preserving visual quality.
+
+The philosophy:
+
+```text
+Measure
+  ↓
+Encode
+  ↓
+Measure again
+  ↓
+Compare
+  ↓
+Only then remove the original
+```
+
+### `ServeWise`
+
+A lightweight local web server designed primarily for previewing and diagnosing documentation websites.
+
+### `clipkit`
+
+A toolkit-oriented approach to downloading and processing online video content.
+
+---
+
+# 🔬 Hardware & Electronics
+
+Experiments that move below the operating system into physical computing.
+
+Topics include:
+
+* electronics
+* transistor models
+* Ebers–Moll
+* circuit analysis
+* SPICE
+* microcontrollers
+* Arduino
+* CPUs
+* memory
+* buses
+* hardware interfaces
+
+The same philosophy applies:
+
+> Don't just use the component. Understand the model underneath it.
+
+---
+
+# 🧪 The Laboratory
+
+Many projects in this organization are experimental.
+
+They may begin as:
+
+```text
+Question
+   ↓
+Hypothesis
+   ↓
+Small experiment
+   ↓
+Measurement
+   ↓
+Implementation
+   ↓
+Failure
+   ↓
+Investigation
+   ↓
+Documentation
+   ↓
+Understanding
+```
+
+Failure is part of the process.
+
+A broken experiment is often more educational than a successful one.
+
+---
+
+# 🗿 Why "System Archaeology"?
+
+Modern computing is built on layers of abstractions.
+
+Each layer hides enormous amounts of complexity.
+
+That is useful.
+
+But sometimes you need to dig through those layers.
+
+A command hides a system call.
+
+A system call hides kernel code.
+
+The kernel hides hardware operations.
+
+A Win32 API call hides the native API, a syscall, and the NT kernel.
+
+A container hides namespaces and cgroups.
+
+Kubernetes hides container runtimes.
+
+A documentation site hides a build system.
+
+An AI assistant hides models, embeddings, retrieval, and inference.
+
+**System Archaeology is about digging through those layers.**
+
+---
+
+# Under the abstraction.
+
+We build.
+
+We measure.
+
+We trace.
+
+We break things.
+
+We investigate.
+
+We document.
+
+And then we go one layer deeper.
+
+---
+
+## Principles
+
+**Understand before automating.**
+
+**Measure before optimizing.**
+
+**Read the source when documentation isn't enough.**
+
+**Prefer reproducible experiments over assumptions.**
+
+**Don't hide complexity when understanding it matters.**
+
+**Document what was actually observed.**
+
+**Distinguish facts, measurements, hypotheses, and conclusions.**
+
+**Never let an abstraction become an excuse to stop learning.**
+
+---
+
+## Status
+
+This organization is an evolving collection of:
+
+* 🔬 experiments
+* 🧰 tools
+* 📚 documentation
+* 🧪 laboratories
+* 📝 research notes
+* 🖥️ infrastructure projects
+* 🤖 local AI experiments
+
+Some projects are mature.
+
+Some are prototypes.
+
+Some exist primarily to answer a question.
+
+That's intentional.
 
 ---
 
 <div dir="rtl" align="right">
 
-### بالعربية
+## بالعربية
 
-كل أداة تمنحك سطحاً أنيقاً: أمرٌ، أو زِر، أو صفحة توثيق. لكن تحت هذا السطح يحدث شيءٌ *فعلاً* —
-عمليات، وحِزَم، واستدعاءات نظام، وملفات، وبايتات. هذا هو موقع التنقيب.
+**System Archaeology** مجموعة من التجارب والأدوات والتوثيق ومشاريع البحث، هدفها فهم كيف تعمل أنظمة الحوسبة فعلاً. لا نتوقف عند الأمر أو الواجهة البرمجية أو الواجهة الرسومية أو التجريد — بل نحفر تحته.
 
-نُنقّب في الأنظمة كما يكشف علماء الآثار طبقات حضارةٍ قديمة: نتجاوز الواجهة البرمجية والأمر
-والواجهة الرسومية والتوثيق لنُظهر ما يحدث حقاً في الأسفل. لينكس/يونكس، وأعماق ويندوز، والبرمجة،
-والحوسبة السحابية، والذكاء الاصطناعي — في شروحاتٍ عملية تبدأ من الشاشة.
+من **لغة C وأعماق لينكس وويندوز** إلى الشبكات والمحاكاة الافتراضية والتخزين وKubernetes والعتاد وأنظمة التوثيق وأدوات الذكاء الاصطناعي: نبني الأشياء، ونفكّكها، ونتتبّع سلوكها، ونوثّق ما نكتشفه — ثم ننزل طبقةً أعمق.
 
 </div>
 
 ---
 
 <div align="center">
+
+## System Archaeology
+
+**Under the abstraction.**
+
 <sub><code>$ under --the-abstraction</code></sub>
+
 </div>
