@@ -326,7 +326,8 @@ These benches run Windows and Linux alike — the same imaging, cloning, and aut
 Beyond the home lab, this includes real enterprise and telecom systems:
 
 * **Zain Sudan (telecom)** — built the operator's virtualization platform from its first steps through to a working production platform.
-* **Enterprise hardware** — hands-on with **Sun SPARC**, **IBM AIX on POWER5**, and **HP** and **Sun blade** systems, and standing these environments up in emulation (QEMU-backed, through GNS3) to study them away from the physical boxes.
+* **Enterprise Unix** — **Sun SPARC / Solaris** and **IBM AIX on POWER**, on real hardware and emulated under **QEMU** from freely available OS media — including recent hands-on **AIX** support (diagnosing a production RAID issue).
+* **Enterprise hardware** — **HP** and **Sun blade** systems.
 
 ---
 
@@ -350,6 +351,8 @@ Projects explore:
 We are particularly interested in the question:
 
 > **How do you know that technical documentation is actually correct?**
+
+This is not theoretical. These methods back real books — for example a multi-volume **Sphinx** series, *Emulating Commercial Unix* (Foundations · Sun / Solaris · IBM POWER / AIX · …), written to capture hard-won operational knowledge and keep it reproducible.
 
 ---
 
