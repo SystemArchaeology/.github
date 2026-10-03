@@ -262,7 +262,7 @@ One major area is the construction of a complete Linux-based tape laboratory inv
 * SCSI generic devices
 * LTO drives
 * tape changers
-* Bareos
+* backup software — **Bareos**, **Veritas NetBackup**, and **EMC NetWorker**
 * PostgreSQL
 * backup catalogs
 * disaster recovery
@@ -283,6 +283,12 @@ Tape Drive
        ↓
 Tape
 ```
+
+### `mhvtl-console`
+
+A **web console and command line for MHVTL**, the Linux virtual tape library —
+[github.com/abdelhaleemahmed/mhvtl-console](https://github.com/abdelhaleemahmed/mhvtl-console).
+It makes a virtual tape lab easy to drive without hand-running the low-level `mtx` / `sg` commands.
 
 ---
 
@@ -314,6 +320,13 @@ Virtualization is where everything else here gets built, broken, and re-tested �
 * **VirtualBox** — the current daily driver; custom **Vagrant boxes** (with my own provisioning) are being published soon.
 
 These benches run Windows and Linux alike — the same imaging, cloning, and automation discipline applied to both.
+
+### In production
+
+Beyond the home lab, this includes real enterprise and telecom systems:
+
+* **Zain Sudan (telecom)** — built the operator's virtualization platform from its first steps through to a working production platform.
+* **Enterprise hardware** — hands-on with **Sun SPARC**, **IBM AIX on POWER5**, and **HP** and **Sun blade** systems, and standing these environments up in emulation (QEMU-backed, through GNS3) to study them away from the physical boxes.
 
 ---
 
