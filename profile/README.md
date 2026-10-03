@@ -71,6 +71,8 @@ They exist to answer questions such as:
 
 Projects exploring Linux, Unix, C programming, system programming, kernel internals, boot processes, tracing, and low-level behavior.
 
+This runs deep and long: a complete **Linux From Scratch** system built from source as a 2005 graduation project, hands-on work from the classic **Red Hat Linux 8/9** era through to **RHEL 8 and 9**, and years spent **teaching Linux**.
+
 ### Kernel & Systems Research
 
 Experiments and educational material for understanding the Linux kernel from the inside out.
@@ -176,7 +178,8 @@ Windows isn't only something you debug — it's something you **deploy**, and th
 
 * **Unattended installation** — answer-file-driven, scripted setup: from the Windows 98 and XP era (answer files served from **floppy** and **CD-ROM**, boot-and-install media) through to modern `unattend.xml` and **Sysprep** imaging.
 * **Boot & install media** — bootable install CDs, **live CDs**, and **multiboot** discs; low-level disk preparation with `gdisk` (rather than `fdisk`); and **USB flash-drive** installers for both Windows and Linux (since 2009).
-* **Network OS deployment** — image-based rollout over the network with **RIS**, and later **WDS**.
+* **Imaging & cloning** — drive-image cloning with **Norton Ghost** (Windows 98, then XP) on real hardware, alongside Sysprep-generalized images.
+* **Network OS deployment** — **PXE**-booted, image-based rollout over the network with **RIS**, then **WDS** and **MDT** task sequences.
 * **Application deployment** — silent and scripted installs, including GUI automation with **AutoIt**.
 * **Active Directory & server services** — building and operating AD on Windows Server **2000, 2003, 2008 and later**, with the supporting roles (DNS, DHCP, Group Policy, file and print, and more).
 
@@ -204,6 +207,11 @@ Areas include:
 * network security
 
 The emphasis is on understanding **what actually happens on the wire**.
+
+It's also a long-running teaching area — **CCNA-level routing and switching** — backed by emulation and real labs:
+
+* **Network emulation** — Cisco topologies with **Dynamips** and **GNS3** since the mid-2000s, back when you calculated the **Idle-PC** value by hand with a separate tool (the early `gns3.net` era).
+* **Wireless** — self-taught on virtual machines, then turned into a professional service.
 
 ---
 
@@ -296,6 +304,16 @@ The project is designed around:
 * hypervisor capability checking
 
 The initial target is VirtualBox, with a longer-term goal of supporting KVM/QEMU and Hyper-V.
+
+### The lab bench
+
+Virtualization is where everything else here gets built, broken, and re-tested — and it goes back a long way:
+
+* **VMware** — from the early Workstation 3.x and **Server 1 & 2** days through to the present.
+* **Microsoft Virtual PC**, and later **Hyper-V**.
+* **VirtualBox** — the current daily driver; custom **Vagrant boxes** (with my own provisioning) are being published soon.
+
+These benches run Windows and Linux alike — the same imaging, cloning, and automation discipline applied to both.
 
 ---
 
