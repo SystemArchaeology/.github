@@ -54,6 +54,7 @@ They exist to answer questions such as:
 * What happens between a system call and the kernel?
 * How does a Win32 call reach the NT kernel?
 * What does the Windows registry really store, and where does it live on disk?
+* How do you install, image, and automate Windows reproducibly — from one machine to a whole fleet?
 * What is really inside a Kubernetes cluster?
 * How do containers reach the kernel?
 * How does a tape library actually work?
@@ -122,11 +123,13 @@ Hardware
 
 ---
 
-# 🪟 Windows Internals
+# 🪟 Windows
 
-Windows gets the same treatment as Linux: not a black box you click through, but a documented, debuggable system with its own well-defined layers — from the Win32 call at the top down to the hardware.
+Windows gets the same treatment as Linux: not a black box you click through, but a documented, debuggable, **deployable** system — understood from the Win32 call at the top down to the hardware, and from a single boot sector out to a whole fleet.
 
-The path from a user-mode call to the machine:
+### Internals
+
+A documented, debuggable system with its own well-defined layers. The path from a user-mode call to the machine:
 
 ```text
 Win32 / .NET Applications
@@ -166,6 +169,18 @@ The questions mirror the Linux ones:
 * What is really inside a crash dump?
 * How do Hyper-V and WSL reach the hardware?
 * Where does Windows actually keep its configuration — and why?
+
+### Deployment, Imaging & Automation
+
+Windows isn't only something you debug — it's something you **deploy**, and that layer has its own depth. This area is grounded in long hands-on experience, from Windows 98 through current Windows Server:
+
+* **Unattended installation** — answer-file-driven, scripted setup: from the Windows 98 and XP era (answer files served from **floppy** and **CD-ROM**, boot-and-install media) through to modern `unattend.xml` and **Sysprep** imaging.
+* **Boot & install media** — bootable install CDs, **live CDs**, and **multiboot** discs; low-level disk preparation with `gdisk` (rather than `fdisk`); and **USB flash-drive** installers for both Windows and Linux (since 2009).
+* **Network OS deployment** — image-based rollout over the network with **RIS**, and later **WDS**.
+* **Application deployment** — silent and scripted installs, including GUI automation with **AutoIt**.
+* **Active Directory & server services** — building and operating AD on Windows Server **2000, 2003, 2008 and later**, with the supporting roles (DNS, DHCP, Group Policy, file and print, and more).
+
+The philosophy is the same as everywhere else in the lab: **automate it, make it reproducible, and understand every layer — from the boot sector up to the domain.**
 
 ---
 
