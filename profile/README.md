@@ -149,20 +149,20 @@ HAL
 Hardware
 ```
 
-Projects and experiments investigate:
+Hands-on, this has meant **Windows API programming in C**, plenty of time in the **registry**, and taking **binaries** apart — the PE format, DLLs, and what an `.exe` really is. The broader architecture we keep digging into:
 
 * the NT kernel, the executive, and the HAL
 * processes, threads, jobs, and the scheduler
 * the virtual memory manager and working sets
 * the **registry** — what it stores and where (hives on disk)
 * **services** and the Service Control Manager
-* the Win32 subsystem vs the **native API** (`ntdll`)
-* **PE / COFF** executable format, image loading, and DLLs
-* drivers (WDM, KMDF / UMDF) and the I/O manager
+* the Win32 subsystem and the **native API** (`ntdll`)
+* the **PE / COFF** executable format, image loading, and DLLs
+* the Windows **driver model** and the I/O manager
 * **ETW**, performance counters, and tracing
-* kernel debugging and crash-dump analysis with **WinDbg**
+* kernel debugging and crash dumps with **WinDbg**
 * the Windows boot process (UEFI → `bootmgr` → `winload` → `ntoskrnl`)
-* **WMI, COM**, and PowerShell internals
+* **WMI, COM**, and PowerShell
 * **WSL, Hyper-V**, and containers on Windows
 
 The questions mirror the Linux ones:
